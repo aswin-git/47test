@@ -1,0 +1,24 @@
+name: deploy
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  cicd-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: python setup
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: driftcheck
+        run: python src/retrain.py
+
+
